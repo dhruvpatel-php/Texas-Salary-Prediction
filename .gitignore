@@ -1,0 +1,23 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite
+
+# Jupyter & IPython
+.ipynb_checkpoints/
+.ipython/
+.jupyter_data/
+.jupyter_runtime/
+
+# Virtual Environments
+venv/
+env/
+.env/
+
+# Scratch & temporary logs
+scratch/
+*.log
+
+# Large raw dataset (Optional: app.py uses precomputed data/app_data.pkl)
+# salary.csv
