@@ -171,7 +171,7 @@ st.sidebar.markdown("""
 st.sidebar.markdown("---")
 st.sidebar.markdown(
     "<div style='font-size: 0.75rem; color: #94a3b8; text-align: center;'>"
-    "Texas State Salary Prediction System<br>Capstone PRCP-1024 | Grade A+ Target</div>",
+    "Texas State Salary Prediction System<br>Capstone Project PRCP-1024</div>",
     unsafe_allow_html=True
 )
 
