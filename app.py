@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 # ------------------------------------------------------------------------------
 st.set_page_config(
     page_title="Texas State Salary Predictor | PRCP-1024",
-    page_icon="⭐",
+    page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -142,7 +142,7 @@ def check_manager(title):
 # ------------------------------------------------------------------------------
 st.sidebar.markdown("""
 <div style="text-align: center; padding: 10px 0 20px;">
-    <h2 style="margin: 0; color: #1e3a8a;">⭐ Texas Salary AI</h2>
+    <h2 style="margin: 0; color: #1e3a8a;">Texas State Salary Intelligence</h2>
     <p style="margin: 4px 0; color: #64748b; font-size: 0.85rem;">PRCP-1024 Workforce Intelligence</p>
 </div>
 """, unsafe_allow_html=True)
@@ -150,16 +150,16 @@ st.sidebar.markdown("""
 nav_selection = st.sidebar.radio(
     "Navigation Menu",
     [
-        "🎯 Salary Predictor",
-        "📊 Workforce Analytics (Task 1)",
-        "🔍 Task 3: Business Insights",
-        "🏆 Model Benchmarks (Task 2)"
+        "Salary Predictor",
+        "Workforce Analytics (Task 1)",
+        "Task 3: Business Insights",
+        "Model Benchmarks (Task 2)"
     ],
     index=0
 )
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("### 📌 Model Performance")
+st.sidebar.markdown("### Model Performance")
 st.sidebar.markdown("""
 - **Model:** Tuned LightGBM
 - **Test $R^2$:** `0.9518` (95.18%)
@@ -176,9 +176,9 @@ st.sidebar.markdown(
 )
 
 # ------------------------------------------------------------------------------
-# 4. View 1: 🎯 Salary Predictor (Inference Calculator)
+# 4. View 1: Salary Predictor (Inference Calculator)
 # ------------------------------------------------------------------------------
-if nav_selection == "🎯 Salary Predictor":
+if nav_selection == "Salary Predictor":
     st.markdown("""
     <div class="main-header">
         <div>
@@ -197,7 +197,7 @@ if nav_selection == "🎯 Salary Predictor":
     col_input1, col_input2 = st.columns([1, 1], gap="large")
 
     with col_input1:
-        st.markdown("### 🏢 Position & Agency Details")
+        st.markdown("### Position & Agency Details")
         
         # Agency select
         agencies = app_data['agencies']
@@ -206,7 +206,7 @@ if nav_selection == "🎯 Salary Predictor":
         
         # Job Title select
         top_titles = app_data['top_titles']
-        custom_option = "➕ [Custom Job Title]"
+        custom_option = "[Custom Job Title]"
         title_options = top_titles + [custom_option]
         
         default_title_idx = title_options.index("SYSTEMS ANALYST V") if "SYSTEMS ANALYST V" in title_options else 0
@@ -221,7 +221,7 @@ if nav_selection == "🎯 Salary Predictor":
         detected_level = extract_roman_level(selected_title)
         detected_mgr = check_manager(selected_title)
 
-        with st.expander("⚙️ Advanced Position Attributes (Auto-Detected)", expanded=False):
+        with st.expander("Advanced Position Attributes (Auto-Detected)", expanded=False):
             job_level = st.slider("Roman Career Tier (Job Level I to VII)", min_value=1, max_value=7, value=detected_level, help="Civil service career ladder progression (e.g. Systems Analyst I through V).")
             is_manager_val = st.checkbox("Managerial / Executive Role", value=bool(detected_mgr), help="Checked if title contains managerial keywords.")
             is_manager = 1 if is_manager_val else 0
@@ -229,12 +229,12 @@ if nav_selection == "🎯 Salary Predictor":
         st.markdown(f"""
         <div style="margin-top: 8px;">
             <span class="badge-tag">Career Level: {job_level}</span>
-            <span class="badge-tag">{'👔 Managerial' if is_manager else '👤 Staff / Frontline'}</span>
+            <span class="badge-tag">{'Managerial' if is_manager else 'Staff / Frontline'}</span>
         </div>
         """, unsafe_allow_html=True)
 
     with col_input2:
-        st.markdown("### ⏳ Employment & Demographics")
+        st.markdown("### Employment & Demographics")
         
         col_hr, col_st = st.columns(2)
         with col_hr:
@@ -259,7 +259,7 @@ if nav_selection == "🎯 Salary Predictor":
 
     st.markdown("---")
     
-    predict_clicked = st.button("🔮 Predict Annual Salary", type="primary", use_container_width=True)
+    predict_clicked = st.button("Predict Annual Salary", type="primary", use_container_width=True)
 
     # Prediction Logic
     if predict_clicked or True:
@@ -339,7 +339,7 @@ if nav_selection == "🎯 Salary Predictor":
             """, unsafe_allow_html=True)
 
         # Visual Comparison Bar
-        st.markdown("#### 📊 Statewide Compensation Distribution Benchmark")
+        st.markdown("#### Statewide Compensation Distribution Benchmark")
         bench_df = pd.DataFrame({
             'Category': ['10th Percentile', '25th Percentile', 'Statewide Median', 'Predicted Position', '75th Percentile', '90th Percentile'],
             'Salary ($)': [pcts[10], pcts[25], pcts[50], pred_val, pcts[75], pcts[90]]
@@ -358,9 +358,9 @@ if nav_selection == "🎯 Salary Predictor":
         plt.close(fig)
 
 # ------------------------------------------------------------------------------
-# 5. View 2: 📊 Workforce Analytics (Task 1)
+# 5. View 2: Workforce Analytics (Task 1)
 # ------------------------------------------------------------------------------
-elif nav_selection == "📊 Workforce Analytics (Task 1)":
+elif nav_selection == "Workforce Analytics (Task 1)":
     st.markdown("""
     <div class="main-header">
         <h1>Workforce Analytics & Quality Audit (Task 1)</h1>
@@ -407,7 +407,7 @@ elif nav_selection == "📊 Workforce Analytics (Task 1)":
         </div>
         """, unsafe_allow_html=True)
 
-    tab1, tab2, tab3 = st.tabs(["📈 Salary Distributions", "🏢 Agency Rankings", "👥 Demographic Equity"])
+    tab1, tab2, tab3 = st.tabs(["Salary Distributions", "Agency Rankings", "Demographic Equity"])
 
     with tab1:
         st.markdown("### Statewide Salary Distribution")
@@ -427,7 +427,7 @@ elif nav_selection == "📊 Workforce Analytics (Task 1)":
         st.pyplot(fig)
         plt.close(fig)
 
-        st.info("💡 **Insight:** The salary distribution is positively skewed (Skewness = 2.70), characterized by a modal density around $45,000 to $50,000 and an elongated right-tail extending to executive investment officers and agency directors.")
+        st.info("**Insight:** The salary distribution is positively skewed (Skewness = 2.70), characterized by a modal density around $45,000 to $50,000 and an elongated right-tail extending to executive investment officers and agency directors.")
 
     with tab2:
         st.markdown("### Top 10 State Agencies by Headcount")
@@ -466,9 +466,9 @@ elif nav_selection == "📊 Workforce Analytics (Task 1)":
             st.dataframe(df_e, use_container_width=True)
 
 # ------------------------------------------------------------------------------
-# 6. View 3: 🔍 Task 3: Business Insights
+# 6. View 3: Task 3: Business Insights
 # ------------------------------------------------------------------------------
-elif nav_selection == "🔍 Task 3: Business Insights":
+elif nav_selection == "Task 3: Business Insights":
     st.markdown("""
     <div class="main-header">
         <h1>Task 3: Executive Business Questions</h1>
@@ -508,13 +508,13 @@ elif nav_selection == "🔍 Task 3: Business Insights":
             </div>
             """, unsafe_allow_html=True)
 
-        st.markdown("#### 🔝 Top 10 Highest Public Compensations in Texas (Sanitized)")
+        st.markdown("#### Top 10 Highest Public Compensations in Texas (Sanitized)")
         df_top = pd.DataFrame(q1_data['top_10_highest'])
         df_top.columns = ['Position Title', 'Agency Name', 'Annual Salary', 'Status', 'Tenure (Yrs)']
         df_top['Annual Salary'] = df_top['Annual Salary'].map('${:,.2f}'.format)
         st.dataframe(df_top, use_container_width=True)
 
-        st.markdown("#### 🔻 Top 10 Lowest Compensations (Part-Time & Intern Positions)")
+        st.markdown("#### Top 10 Lowest Compensations (Part-Time & Intern Positions)")
         df_low = pd.DataFrame(q1_data['top_10_lowest'])
         df_low.columns = ['Position Title', 'Agency Name', 'Annual Salary', 'Hrs/Wk', 'Status']
         df_low['Annual Salary'] = df_low['Annual Salary'].map('${:,.2f}'.format)
@@ -552,7 +552,7 @@ elif nav_selection == "🔍 Task 3: Business Insights":
 
         c_d1, c_d2 = st.columns(2)
         with c_d1:
-            st.markdown("#### 📈 Top 10 Highest Wage Disparity Agencies")
+            st.markdown("#### Top 10 Highest Wage Disparity Agencies")
             df_td = pd.DataFrame(q2_data['top_disparity'])[['agency', 'mgr_median', 'emp_median', 'ratio', 'gap']]
             df_td.columns = ['Agency', 'Mgr Med ($)', 'Emp Med ($)', 'Ratio', 'Gap ($)']
             df_td['Mgr Med ($)'] = df_td['Mgr Med ($)'].map('${:,.0f}'.format)
@@ -562,7 +562,7 @@ elif nav_selection == "🔍 Task 3: Business Insights":
             st.dataframe(df_td, use_container_width=True)
 
         with c_d2:
-            st.markdown("#### ⚖️ Top 10 Most Egalitarian Agencies (Lowest Disparity)")
+            st.markdown("#### Top 10 Most Egalitarian Agencies (Lowest Disparity)")
             df_bd = pd.DataFrame(q2_data['bottom_disparity'])[['agency', 'mgr_median', 'emp_median', 'ratio', 'gap']]
             df_bd.columns = ['Agency', 'Mgr Med ($)', 'Emp Med ($)', 'Ratio', 'Gap ($)']
             df_bd['Mgr Med ($)'] = df_bd['Mgr Med ($)'].map('${:,.0f}'.format)
@@ -592,12 +592,12 @@ elif nav_selection == "🔍 Task 3: Business Insights":
         st.pyplot(fig)
         plt.close(fig)
 
-        st.info("💡 **Survivorship Bias Caution:** In single-snapshot administrative data, earlier cohorts exhibit higher compensation due to tenured survivor bias (veteran workers who stayed and promoted into management).")
+        st.info("**Survivorship Bias Caution:** In single-snapshot administrative data, earlier cohorts exhibit higher compensation due to tenured survivor bias (veteran workers who stayed and promoted into management).")
 
 # ------------------------------------------------------------------------------
-# 7. View 4: 🏆 Model Benchmarks (Task 2)
+# 7. View 4: Model Benchmarks (Task 2)
 # ------------------------------------------------------------------------------
-elif nav_selection == "🏆 Model Benchmarks (Task 2)":
+elif nav_selection == "Model Benchmarks (Task 2)":
     st.markdown("""
     <div class="main-header">
         <h1>Model Benchmarking & Architectural Evaluation (Task 2)</h1>
@@ -619,10 +619,10 @@ elif nav_selection == "🏆 Model Benchmarks (Task 2)":
     bench_display['MAPE'] = bench_display['MAPE'].map('{:.2f}%'.format)
     bench_display['Fit Time (s)'] = bench_display['Fit Time (s)'].map('{:.2f}s'.format)
 
-    st.markdown("### 📋 Master Performance Matrix")
+    st.markdown("### Master Performance Matrix")
     st.dataframe(bench_display, use_container_width=True)
 
-    st.markdown("### 📊 Test R² and MAE Comparison")
+    st.markdown("### Test R² and MAE Comparison")
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
     
     order_r2 = bench_df.sort_values('Test R2', ascending=True)
@@ -643,6 +643,6 @@ elif nav_selection == "🏆 Model Benchmarks (Task 2)":
     st.pyplot(fig)
     plt.close(fig)
 
-    st.success("🎯 **Final Production Choice:** Tuned LightGBM Regressor delivers the optimal balance of maximum accuracy ($R^2 = 0.9518$, MAE = $2,982.79), minimal overfitting gap ($+0.0065$), rapid training latency (3.53s), and compact artifact size (3.24 MB).")
+    st.success("**Final Production Choice:** Tuned LightGBM Regressor delivers the optimal balance of maximum accuracy ($R^2 = 0.9518$, MAE = $2,982.79), minimal overfitting gap ($+0.0065$), rapid training latency (3.53s), and compact artifact size (3.24 MB).")
 
 
