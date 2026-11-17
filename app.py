@@ -153,8 +153,7 @@ nav_selection = st.sidebar.radio(
         "🎯 Salary Predictor",
         "📊 Workforce Analytics (Task 1)",
         "🔍 Task 3: Business Insights",
-        "🏆 Model Benchmarks (Task 2)",
-        "🚀 Streamlit Cloud Deployment"
+        "🏆 Model Benchmarks (Task 2)"
     ],
     index=0
 )
@@ -646,52 +645,4 @@ elif nav_selection == "🏆 Model Benchmarks (Task 2)":
 
     st.success("🎯 **Final Production Choice:** Tuned LightGBM Regressor delivers the optimal balance of maximum accuracy ($R^2 = 0.9518$, MAE = $2,982.79), minimal overfitting gap ($+0.0065$), rapid training latency (3.53s), and compact artifact size (3.24 MB).")
 
-# ------------------------------------------------------------------------------
-# 8. View 5: 🚀 Streamlit Cloud Deployment Guide
-# ------------------------------------------------------------------------------
-elif nav_selection == "🚀 Streamlit Cloud Deployment":
-    st.markdown("""
-    <div class="main-header">
-        <h1>Streamlit Cloud Deployment Guide</h1>
-        <p>Step-by-step instructions for deploying this application live to Streamlit Community Cloud (free hosting).</p>
-    </div>
-    """, unsafe_allow_html=True)
 
-    st.markdown("""
-    ### 📦 Repository Preparation Checklist
-
-    All required production files are already configured and bundled in this directory:
-    - `app.py` — The primary Streamlit entrypoint.
-    - `models/best_model.pkl` — The trained LightGBM Scikit-Learn pipeline (3.24 MB).
-    - `data/app_data.pkl` — Precomputed analytics cache (60 KB) for instant loading.
-    - `requirements.txt` — Pinned production packages (`streamlit`, `scikit-learn`, `lightgbm`, etc.).
-    - `.streamlit/config.toml` — Production theme and server settings.
-
-    ---
-
-    ### 🚀 3-Step Deployment Process
-
-    #### Step 1: Push Code to GitHub
-    Create a new repository on your GitHub account (e.g., `texas-salary-prediction`) and run:
-    ```bash
-    git init
-    git add app.py requirements.txt .streamlit/ models/best_model.pkl data/app_data.pkl README.md
-    git commit -m "Deploy Texas State Salary Prediction Streamlit App"
-    git branch -M main
-    git remote add origin https://github.com/<your-username>/texas-salary-prediction.git
-    git push -u origin main
-    ```
-
-    #### Step 2: Sign in to Streamlit Community Cloud
-    1. Navigate to **[share.streamlit.io](https://share.streamlit.io/)**.
-    2. Click **"Continue with GitHub"** and authenticate.
-
-    #### Step 3: Deploy with 1 Click
-    1. Click the blue **"New app"** button.
-    2. Select your repository: `<your-username>/texas-salary-prediction`.
-    3. Branch: `main`.
-    4. Main file path: `app.py`.
-    5. Click **"Deploy!"** 🚀.
-
-    Your app will be live with a permanent public URL (e.g., `https://texas-salary.streamlit.app`) in under 2 minutes!
-    """)
