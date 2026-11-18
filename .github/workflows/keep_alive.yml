@@ -1,0 +1,55 @@
+name: Keep Streamlit App Awake
+
+on:
+  schedule:
+    # Runs automatically every 12 hours (at 00:00 and 12:00 UTC)
+    - cron: '0 */12 * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Playwright & Headless Chromium
+        run: |
+          pip install playwright
+          playwright install chromium
+
+      - name: Ping and Wake Up Streamlit App
+        run: |
+          python - << 'EOF'
+          import sys
+          from playwright.sync_api import sync_playwright
+
+          url = "https://texas-salary-prediction.streamlit.app"
+          print(f"Connecting to {url} using Headless Chromium...")
+
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              page = browser.new_page()
+              
+              try:
+                  page.goto(url, timeout=60000, wait_until="networkidle")
+                  page.wait_for_timeout(6000)
+                  
+                  # Look for the wake-up button if the app is sleeping
+                  wake_button = page.query_selector('button:has-text("Yes, get this app back up!")')
+                  
+                  if wake_button:
+                      print("Sleeping app detected ('Zzzz')! Clicking wake-up button...")
+                      wake_button.click()
+                      page.wait_for_timeout(10000)
+                      print("Successfully clicked wake-up button. Container is spinning up!")
+                  else:
+                      print("App is already awake and active. Inactivity timer successfully reset!")
+                      
+              except Exception as e:
+                  print(f"Page interaction finished: {e}")
+              finally:
+                  browser.close()
+          EOF
